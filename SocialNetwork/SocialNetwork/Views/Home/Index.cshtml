@@ -1,0 +1,11 @@
+﻿@using SocialNetwork.ViewModels;
+@model MyStoryViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<ul>
+    @foreach (var item in Model.Users)
+    {
+        <li>@item.Name</li>
+    }
+</ul>
