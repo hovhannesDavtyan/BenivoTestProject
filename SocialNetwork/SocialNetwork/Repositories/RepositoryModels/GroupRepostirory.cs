@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Repositories.RepositoryModels
 {
-    public class GroupRepostirory : IRepository<Group>
+    public class GroupRepostirory : IGroupRepository
     {
         private SocialNetworkContext _context;
 
@@ -56,14 +56,54 @@ namespace SocialNetwork.Repositories.RepositoryModels
             throw new NotImplementedException();
         }
 
-        public bool Update(Group item)
+        public int Update(Group item)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdateAsync(Group item)
+        public async Task<int> UpdateAsync(Group item)
         {
             throw new NotImplementedException();
+        }
+
+        public int UpdateCounts(int id, int memberCount, int storyCount)
+        {
+            try
+            {
+                Group group = new Group();
+                group.Id = id;
+                group.MemberCount = memberCount;
+                group.StoryCount = storyCount;
+                _context.Groups.Attach(group);
+                var entry = _context.Entry(group);
+                entry.Property(e => e.MemberCount).IsModified = true;
+                entry.Property(e => e.StoryCount).IsModified = true;
+                return _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<int> UpdateCountsAsync(int id, int memberCount, int storyCount)
+        {
+            try
+            {
+                Group group = new Group();
+                group.Id = id;
+                group.MemberCount = memberCount;
+                group.StoryCount = storyCount;
+                _context.Groups.Attach(group);
+                var entry = _context.Entry(group);
+                entry.Property(e => e.MemberCount).IsModified = true;
+                entry.Property(e => e.StoryCount).IsModified = true;
+                return await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

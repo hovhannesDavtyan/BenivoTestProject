@@ -8,6 +8,11 @@ namespace SocialNetwork.ViewModels
 {
     public class StoryViewModel
     {
-        
+        public IEnumerable<Story> UserStories;
+
+        public StoryViewModel()
+        {
+            UserStories = new List<Story>();
+        }
     }
 }

@@ -17,8 +17,8 @@ namespace SocialNetwork.Repositories
         bool Remove(int id);
         Task<bool> RemoveAsync(int id);
 
-        bool Update(T item);
-        Task<bool> UpdateAsync(T item);
+        int Update(T item);
+        Task<int> UpdateAsync(T item);
 
         bool Add(T item);
         Task<bool> AddAsync(T item);

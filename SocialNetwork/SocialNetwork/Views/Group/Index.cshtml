@@ -1,0 +1,20 @@
+﻿@using SocialNetwork.ViewModels;
+@model GroupsViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <ul class="story-container col-md-12">
+        @foreach (var item in Model.Groups)
+        {
+            <li class="story-card col-md-2">
+                <h6>@item.Name</h6>
+                <h6>@item.Description</h6>
+                <h6>Member Count : @item.MemberCount</h6>
+                <h6>Story Count : @item.StoryCount</h6>
+            </li>
+        }
+    </ul>
+</div>
+
+

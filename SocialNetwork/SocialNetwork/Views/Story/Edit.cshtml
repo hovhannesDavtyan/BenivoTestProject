@@ -1,0 +1,21 @@
+﻿@using SocialNetwork.ViewModels;
+@model StoryCreateEditViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="row">
+    @using (Html.BeginForm("Edit", "Story", FormMethod.Post, new { @class = "form-create col-md-6" }))
+    {
+        @Html.HiddenFor(s => s.OldGroupId)
+        @Html.LabelFor(m => m.Title, new { @class = "create-label" })
+        @Html.TextBoxFor(m => m.Title, new { @class = "create-input", required = "required" });
+        @Html.LabelFor(m => m.Description, new { @class = "create-label" })
+        @Html.TextBoxFor(m => m.Description, new { @class = "create-input", required = "required" });
+        @Html.LabelFor(m => m.Content, new { @class = "create-label" })
+        @Html.TextBoxFor(m => m.Content, new { @class = "create-input", required = "required" });
+        @Html.DropDownListFor(m => m.GroupId, new SelectList(Model.Groups, "Id", "Name", 1), "---Select group---", new { @class = "create-select", required = "required" });
+        <input class="submit-button" type="submit" value="Save" class="submit" />
+    }
+</div>
+

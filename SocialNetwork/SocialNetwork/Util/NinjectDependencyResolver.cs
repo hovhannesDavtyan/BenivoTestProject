@@ -28,7 +28,8 @@ namespace SocialNetwork.Util
         {
             kernel.Bind<IRepository<Group>>().To<GroupRepostirory>();
             kernel.Bind<IRepository<Story>>().To<StoryRepository>();
-            kernel.Bind<IRepository<User>>().To<UserRepository>();
+            kernel.Bind<IStoryRepository>().To<StoryRepository>();
+            kernel.Bind<IGroupRepository>().To<GroupRepostirory>();
         }
     }
 }

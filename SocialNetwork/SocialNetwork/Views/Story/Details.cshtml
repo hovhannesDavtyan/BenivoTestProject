@@ -1,0 +1,14 @@
+﻿@using SocialNetwork.ViewModels;
+@model StoryDetailViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <span class="story-card">
+        <h5>Title: @Model.story.Title</h5>
+        <p>Description: @Model.story.Description</p>
+        <p>Content: @Model.story.Content</p>
+    </span>
+</div>
+
