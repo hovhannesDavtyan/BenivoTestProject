@@ -84,7 +84,7 @@ namespace SocialNetwork.Controllers
                     string id = User.Identity.GetUserId();
                     Story storyModel = model.Convert();
                     storyModel.UserId = id;
-                    _storyRepository.Add(storyModel);
+                    await _storyRepository.AddAsync(storyModel);
                     int memberCount = _storyRepository.GetGroupMemberCount(model.GroupId);
                     int storyCount = _storyRepository.GetGroupStoryCount(model.GroupId);
                     _groupRepository.UpdateCounts(model.GroupId, memberCount, storyCount);
@@ -123,13 +123,13 @@ namespace SocialNetwork.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _storyRepository.Update(model.Convert(id));
+                    await _storyRepository.UpdateAsync(model.Convert(id));
                     int memberCount = _storyRepository.GetGroupMemberCount(model.GroupId);
                     int storyCount = _storyRepository.GetGroupStoryCount(model.GroupId);
-                    _groupRepository.UpdateCounts(model.GroupId, memberCount, storyCount);
+                    await _groupRepository.UpdateCountsAsync(model.GroupId, memberCount, storyCount);
                     int memberCountOld = _storyRepository.GetGroupMemberCount(model.OldGroupId);
                     int storyCountOld = _storyRepository.GetGroupStoryCount(model.OldGroupId);
-                    _groupRepository.UpdateCounts(model.OldGroupId, memberCountOld, storyCountOld);
+                    await _groupRepository.UpdateCountsAsync(model.OldGroupId, memberCountOld, storyCountOld);
                     return RedirectToAction("Index");
                 }
                 model.IsValid = false;
