@@ -217,6 +217,7 @@ namespace SocialNetwork.Repositories.RepositoryModels
                 entry.Property(e => e.Title).IsModified = true;
                 entry.Property(e => e.PostedOn).IsModified = true;
                 entry.Property(e => e.Content).IsModified = true;
+                entry.Property(e => e.GroupId).IsModified = true;
                 return _context.SaveChanges();
             }
             catch (Exception ex)

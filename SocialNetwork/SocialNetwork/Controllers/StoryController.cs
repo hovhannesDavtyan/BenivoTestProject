@@ -59,10 +59,17 @@ namespace SocialNetwork.Controllers
         // GET: Story/Create
         public async Task<ActionResult> Create()
         {
-            StoryCreateEditViewModel model = new StoryCreateEditViewModel();
-            model.Groups = _groupRepository.GetAll();
-            model.IsValid = true;
-            return View(model);
+            try
+            {
+                StoryCreateEditViewModel model = new StoryCreateEditViewModel();
+                model.Groups = _groupRepository.GetAll();
+                model.IsValid = true;
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
 
         [Authorize]
@@ -88,7 +95,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return View("Error");
             }
         }
 
@@ -104,7 +111,7 @@ namespace SocialNetwork.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return View("Error");
             }
         }
 
@@ -130,7 +137,7 @@ namespace SocialNetwork.Controllers
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
     }
