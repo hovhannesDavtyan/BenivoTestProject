@@ -34,12 +34,14 @@ namespace SocialNetwork.Tests.Controllers
         public void ThenReturnTheStoryViewModel()
         {
             // Arrange
-            _storyRepository.Setup(e => e.GetAll()).Returns(_stories.AsQueryable());
-            _storyRepository.Setup(e => e.GetAllByUserId(It.IsAny<string>())).Returns(_stories.Where(x => x.UserId == "UserId1").AsQueryable());
+            _storyRepository.Setup(e => e.GetAll(1)).Returns(_stories.AsQueryable());
+            _storyRepository.Setup(e => e.GetAllByUserId(It.IsAny<string>(), It.IsAny<int>())).Returns(_stories.Where(x => x.UserId == "UserId1").AsQueryable());
+            _storyRepository.Setup(e => e.GetItemCountByUserId(It.IsAny<string>()));
             _groupRepository.Setup(e => e.GetAll()).Returns(_groups.AsQueryable());
             var controller = new StoryController(_storyRepository.Object, _groupRepository.Object)
             {
-                GetUserId = () => "UserId1"
+                GetUserId = () => "UserId1",
+                GetPageCountByItemCount = (x) => 2
             };
 
             // Act
@@ -76,7 +78,7 @@ namespace SocialNetwork.Tests.Controllers
         public void ThenReturnStoryCreateEditViewModelCreate()
         {
             // Arrange
-            _storyRepository.Setup(e => e.GetAll()).Returns(_stories.AsQueryable());
+            _storyRepository.Setup(e => e.GetAll(1)).Returns(_stories.AsQueryable());
             var controller = new StoryController(_storyRepository.Object, _groupRepository.Object);
 
             // Act
@@ -95,7 +97,7 @@ namespace SocialNetwork.Tests.Controllers
         public void ThenReturnStoryCreateEditViewModelEdit()
         {
             // Arrange
-            _storyRepository.Setup(e => e.GetAll()).Returns(_stories.AsQueryable());
+            _storyRepository.Setup(e => e.GetAll(1)).Returns(_stories.AsQueryable());
             _storyRepository.Setup(e => e.Find(It.IsAny<int>())).Returns(_stories.Where(x => x.Id == 2).FirstOrDefault());
             var controller = new StoryController(_storyRepository.Object, _groupRepository.Object);
 

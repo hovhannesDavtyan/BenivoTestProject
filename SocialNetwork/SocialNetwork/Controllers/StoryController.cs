@@ -14,24 +14,27 @@ namespace SocialNetwork.Controllers
         private IStoryRepository _storyRepository;
         private IGroupRepository _groupRepository;
         public Func<string> GetUserId; //For testing
+        public Func<int, int> GetPageCountByItemCount; //For testing
 
         public StoryController(IStoryRepository storyRepository, IGroupRepository groupRepository)
         {
             _storyRepository = storyRepository;
             _groupRepository = groupRepository;
             GetUserId = () => User.Identity.GetUserId();
+            GetPageCountByItemCount =  Extensions.GetPageCountByItemCount;
         }
         // GET: Story
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
             try
             {
                 string id = GetUserId();
                 StoryViewModel viewModel = new StoryViewModel();
-                viewModel.UserStories = _storyRepository.GetAllByUserId(id);
+                viewModel.UserStories = _storyRepository.GetAllByUserId(id, page);
+                viewModel.pageCount = GetPageCountByItemCount( _storyRepository.GetItemCountByUserId(id));
                 return View(viewModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View("Error");
             }

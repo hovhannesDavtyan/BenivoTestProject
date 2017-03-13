@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Web.Configuration;
 
 namespace SocialNetwork.Repositories.RepositoryModels
 {
     public class StoryRepository : IStoryRepository
     {
         private SocialNetworkContext _context;
+        private int _perPage = int.Parse(WebConfigurationManager.AppSettings["ItemsPerPage"]);
 
         public StoryRepository(SocialNetworkContext context)
         {
@@ -68,11 +70,11 @@ namespace SocialNetwork.Repositories.RepositoryModels
             }
         }
 
-        public IEnumerable<Story> GetAll()
+        public IEnumerable<Story> GetAll(int page)
         {
             try
             {
-                return _context.Stories.ToList();
+                return _context.Stories.Skip((page - 1) * _perPage).Take(_perPage).ToList();
             }
             catch (Exception ex)
             {
@@ -80,11 +82,11 @@ namespace SocialNetwork.Repositories.RepositoryModels
             }
         }
 
-        public async Task<IEnumerable<Story>> GetAllAsync()
+        public async Task<IEnumerable<Story>> GetAllAsync(int page)
         {
             try
             {
-                return await _context.Stories.ToListAsync();
+                return await _context.Stories.Skip((page - 1) * _perPage).Take(_perPage).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -92,11 +94,12 @@ namespace SocialNetwork.Repositories.RepositoryModels
             }
         }
 
-        public IEnumerable<Story> GetAllByUserId(string Id)
+        public IEnumerable<Story> GetAllByUserId(string Id, int page)
         {
             try
             {
-                return _context.Stories.Where(x => String.Compare(x.UserId, Id, true) == 0).ToList();
+                return _context.Stories.Where(x => String.Compare(x.UserId, Id, true) == 0).OrderBy(x=>x.Id)
+                    .Skip((page - 1) * _perPage).Take(_perPage).ToList();
             }
             catch (Exception ex)
             {
@@ -104,11 +107,24 @@ namespace SocialNetwork.Repositories.RepositoryModels
             }
         }
 
-        public async Task<IEnumerable<Story>> GetAllByUserIdAsync(string Id)
+        public async Task<IEnumerable<Story>> GetAllByUserIdAsync(string Id, int page)
         {
             try
             {
-                return await _context.Stories.Where(x => String.Compare(x.UserId, Id, true) == 0).ToListAsync();
+                return await _context.Stories.Where(x => String.Compare(x.UserId, Id, true) == 0).OrderBy(x => x.Id)
+                    .Skip((page - 1) * _perPage).Take(_perPage).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public int GetItemCountByUserId(string Id)
+        {
+            try
+            {
+                return _context.Stories.Where(x => String.Compare(x.UserId, Id, true) == 0).Count();
             }
             catch (Exception ex)
             {

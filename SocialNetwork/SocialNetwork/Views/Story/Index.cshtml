@@ -16,5 +16,10 @@
 
         <li class="story-card story-card-add col-md-2"><a href="~/Story/Create/" title="Create"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
     </ul>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.pageCount; i++)
+        {
+            <li>@Html.ActionLink(i.ToString(), "Index", "Story", new { page = i.ToString() }, null)</li>
+        }
+    </ul>
 </div>
-

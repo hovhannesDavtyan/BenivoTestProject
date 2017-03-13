@@ -18,6 +18,11 @@ namespace SocialNetwork
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Group", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Page",
+                url: "{controller}/{action}/{page}",
+                defaults: new { controller = "Story", action = "Index", page = UrlParameter.Optional }
+            );
         }
     }
 }

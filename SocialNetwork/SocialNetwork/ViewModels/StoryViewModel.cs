@@ -9,6 +9,7 @@ namespace SocialNetwork.ViewModels
     public class StoryViewModel
     {
         public IEnumerable<Story> UserStories;
+        public int pageCount { get; set; }
 
         public StoryViewModel()
         {

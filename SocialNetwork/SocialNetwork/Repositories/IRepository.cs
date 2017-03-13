@@ -8,9 +8,6 @@ namespace SocialNetwork.Repositories
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
-        Task<IEnumerable<T>> GetAllAsync();
-
         T Find(int key);
         Task<T> FindAsync(int key);
 

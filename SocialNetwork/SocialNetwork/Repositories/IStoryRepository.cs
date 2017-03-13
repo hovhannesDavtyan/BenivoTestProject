@@ -9,12 +9,17 @@ namespace SocialNetwork.Repositories
 {
     public interface IStoryRepository : IRepository<Story>
     {
-        IEnumerable<Story> GetAllByUserId(string Id);
-        Task<IEnumerable<Story>> GetAllByUserIdAsync(string Id);
+        IEnumerable<Story> GetAll(int page);
+        Task<IEnumerable<Story>> GetAllAsync(int page);
+
+        IEnumerable<Story> GetAllByUserId(string Id, int page);
+        Task<IEnumerable<Story>> GetAllByUserIdAsync(string Id, int page);
 
         int GetGroupMemberCount(int Id);
 
         int GetGroupStoryCount(int Id);
         Task<int> GetGroupStoryCountAsync(int Id);
+
+        int GetItemCountByUserId(string Id);
     }
 }
