@@ -13,9 +13,9 @@ namespace SocialNetwork.Controllers
 {
     public class GroupController : Controller
     {
-        private IRepository<Group> _groupRepository;
+        private IGroupRepository _groupRepository;
 
-        public GroupController(IRepository<Group> groupRepository)
+        public GroupController(IGroupRepository groupRepository)
         {
             _groupRepository = groupRepository;
         }
