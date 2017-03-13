@@ -27,7 +27,7 @@ namespace SocialNetwork.Migrations
             Id = "557dd4a5-874e-49eb-90c2-8eca5b34fcd1",
             Email = "hovows@gmail.com",
             EmailConfirmed = false,
-            PasswordHash = "AE5OvtujxabJ1tTCJItM2FQ86SN2f4qKx3OGKHnkIc9R+Vig64rAHIKfkLkrX35+aQ==",
+            PasswordHash = "AAgQNcYpUQz7WZye4elSEdLY3TcOAE3eXRyFk+FYc07g16aSJFR7Z8dHWJTDiDeGFA==",
             SecurityStamp = "a5908dd0-0e13-4138-be9f-0752ff251a1f",
             UserName= "hovows@gmail.com"
         });
