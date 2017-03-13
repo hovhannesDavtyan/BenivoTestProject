@@ -38,12 +38,26 @@ namespace SocialNetwork.Repositories.RepositoryModels
 
         public IEnumerable<Group> GetAll()
         {
-            return _context.Groups.ToList();
+            try
+            {
+                return _context.Groups.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<Group>> GetAllAsync()
         {
-            return await _context.Groups.ToListAsync();
+            try
+            {
+                return await _context.Groups.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public bool Remove(int id)

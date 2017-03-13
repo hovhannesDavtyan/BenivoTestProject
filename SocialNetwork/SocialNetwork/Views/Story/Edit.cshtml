@@ -5,6 +5,10 @@
 }
 
 <div class="row">
+    @if (!Model.IsValid)
+    {
+        <p>Not Valid Input</p>
+    }
     @using (Html.BeginForm("Edit", "Story", FormMethod.Post, new { @class = "form-create col-md-6" }))
     {
         @Html.HiddenFor(s => s.OldGroupId)

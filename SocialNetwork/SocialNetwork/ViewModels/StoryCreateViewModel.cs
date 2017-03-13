@@ -13,6 +13,7 @@ namespace SocialNetwork.ViewModels
         public StoryCreateEditViewModel()
         {
             Groups = new List<Group>();
+            IsValid = true;
         }
 
         public StoryCreateEditViewModel(Story story)
@@ -42,6 +43,7 @@ namespace SocialNetwork.ViewModels
 
         public int GroupId { get; set; }
         public int OldGroupId { get; set; }
+        public bool IsValid { get; set; }
 
         public Story Convert()
         {

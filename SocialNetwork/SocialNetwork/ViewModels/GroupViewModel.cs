@@ -6,11 +6,11 @@ using System.Web;
 
 namespace SocialNetwork.ViewModels
 {
-    public class GroupsViewModel
+    public class GroupViewModel
     {
         public IEnumerable<Group> Groups;
 
-        public GroupsViewModel()
+        public GroupViewModel()
         {
             Groups = new List<Group>();
         }

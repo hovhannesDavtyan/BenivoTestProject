@@ -118,23 +118,45 @@ namespace SocialNetwork.Repositories.RepositoryModels
 
         public int GetGroupMemberCount(int Id)
         {
-            return (from q in _context.Stories
-                    where q.GroupId == Id
-                    select q.UserId).ToHashSet().Count();
+            try
+            {
+
+                return (from q in _context.Stories
+                        where q.GroupId == Id
+                        select q.UserId).ToHashSet().Count();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         public int GetGroupStoryCount(int Id)
         {
-            return (from q in _context.Stories
-                         where q.GroupId == Id
-                         select q).Count();
+            try
+            {
+                return (from q in _context.Stories
+                        where q.GroupId == Id
+                        select q).Count();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         public async Task<int> GetGroupStoryCountAsync(int Id)
         {
-            return await (from q in _context.Stories
-                         where q.GroupId == Id
-                         select q).CountAsync();
+            try
+            {
+                return await (from q in _context.Stories
+                              where q.GroupId == Id
+                              select q).CountAsync();
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
 
         public bool Remove(int id)

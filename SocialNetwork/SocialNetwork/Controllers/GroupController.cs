@@ -5,6 +5,7 @@ using SocialNetwork.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,21 +13,25 @@ namespace SocialNetwork.Controllers
 {
     public class GroupController : Controller
     {
-        private IStoryRepository _storyRepository;
         private IRepository<Group> _groupRepository;
 
-        public GroupController( IRepository<Group> groupRepository, IStoryRepository storyRepository)
+        public GroupController(IRepository<Group> groupRepository)
         {
             _groupRepository = groupRepository;
-            _storyRepository = storyRepository;
         }
         // GET: Group
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            string id = User.Identity.GetUserId();
-            GroupsViewModel viewModel = new GroupsViewModel();
-            viewModel.Groups = _groupRepository.GetAll();
-            return View(viewModel);
+            try
+            {
+                GroupViewModel viewModel = new GroupViewModel();
+                viewModel.Groups =  _groupRepository.GetAll();
+                return View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+            }
         }
     }
 }

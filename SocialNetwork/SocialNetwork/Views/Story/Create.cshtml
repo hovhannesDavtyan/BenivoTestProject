@@ -5,6 +5,10 @@
 }
 
 <div class="row">
+    @if (!Model.IsValid)
+    {
+        <p>Not Valid Input</p>
+    }
     @using (Html.BeginForm("Create", "Story", FormMethod.Post, new { @class = "form-create col-md-6" }))
     {
         @Html.LabelFor(x => x.Title, new {@class="create-label" })
